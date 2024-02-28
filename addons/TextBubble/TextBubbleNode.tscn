@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5yhpo8xj1csl"]
+
+[ext_resource type="Script" path="res://addons/TextBubble/TextBubbleNode.cs" id="1_r4kwa"]
+[ext_resource type="Resource" uid="uid://d1elrixd4ud4u" path="res://addons/TextBubble/TextBubble.tres" id="2_yxt2k"]
+
+[sub_resource type="Animation" id="Animation_m6wv7"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_chmb6"]
+resource_name = "fadeout"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_37exq"]
+_data = {
+"RESET": SubResource("Animation_m6wv7"),
+"fadeout": SubResource("Animation_chmb6")
+}
+
+[node name="TextBubbleNode" type="Node2D"]
+z_index = 100
+script = ExtResource("1_r4kwa")
+TextBubbleResource = ExtResource("2_yxt2k")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -34.0
+offset_right = 125.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_37exq")
+}
+
+[connection signal="timeout" from="Timer" to="." method="_OnTimerTimeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_OnAnimationPlayerAnimationFinished"]

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://d1elrixd4ud4u"]
+
+[ext_resource type="Script" path="res://addons/TextBubble/TextBubbleResource.cs" id="1_b70pk"]
+
+[resource]
+script = ExtResource("1_b70pk")
+Text = "Hello World!"
+LifeTime = 1.0
+Offset = Vector2(0, 0)
+FadeoutTime = 1.0
